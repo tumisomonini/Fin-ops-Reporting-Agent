@@ -1,0 +1,4 @@
+INVOICE #INV-55102
+Vendor: [blank]
+Amount: R6,750
+Due Date: [not specified]

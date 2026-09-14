@@ -1,0 +1,6 @@
+Date        Description              Category        Amount (R)   Type
+2026-08-01  Client lunch meeting     Meals           450.00       Expense
+2026-08-03  Software subscription    Software        1,200.00     Expense
+2026-08-05  Consulting income        Revenue         15,000.00    Income
+2026-08-10  Fuel reimbursement       Travel          620.00       Expense
+2026-08-12  Office supplies          Supplies        340.00       Expense

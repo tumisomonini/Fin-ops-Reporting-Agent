@@ -1,0 +1,12 @@
+INVOICE #INV-20394
+Date: 2026-08-14
+Due Date: 2026-09-13
+Vendor: Bramwell & Co Supplies
+Bill To: Glucode (Pty) Ltd
+Item: Office furniture — 4x ergonomic chairs
+Quantity: 4
+Unit Price: R2,150.00
+Subtotal: R8,600.00
+Tax (15%): R1,290.00
+Total Due: R9,890.00
+Status: Unpaid

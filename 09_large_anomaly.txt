@@ -1,0 +1,6 @@
+Date        Description              Category        Amount (R)   Type
+2026-09-01  Team coffee run          Meals           180.00       Expense
+2026-09-02  Stationery               Supplies        95.00        Expense
+2026-09-03  Consulting retainer      Wire transfer   485000.00    Expense
+2026-09-04  Parking reimbursement    Travel          60.00        Expense
+2026-09-05  Printer ink              Supplies        210.00       Expense
