@@ -1,0 +1,92 @@
+[
+  {
+    "prompt": "Test prompt",
+    "prompt_id": "25998f12-0682-4dbc-9b60-69b0541fa78f",
+    "prompt_name": "ad-hoc",
+    "context": {},
+    "retrieval": [
+      {
+        "document": null,
+        "entity_type": null,
+        "entity": null
+      },
+      {
+        "document": null,
+        "entity_type": null,
+        "entity": null
+      },
+      {
+        "document": null,
+        "entity_type": null,
+        "entity": null
+      },
+      {
+        "document": null,
+        "entity_type": null,
+        "entity": null
+      },
+      {
+        "document": "7ba721b5-191d-46a8-9693-bf994a0f8525",
+        "entity_type": [
+          "Vendor"
+        ],
+        "entity": {
+          "name": "Zenith IT Services"
+        }
+      },
+      {
+        "document": "7ba721b5-191d-46a8-9693-bf994a0f8525",
+        "entity_type": [
+          "Transaction"
+        ],
+        "entity": {
+          "amount": 28000,
+          "description": "Monthly vendor contract renewal \u2014 Zenith IT Services",
+          "currency": "ZAR",
+          "id": "ff212bec-f21d-4bbd-bf93-e5d390944be0",
+          "category": "IT Services / Contract",
+          "type": "expense"
+        }
+      },
+      {
+        "document": "7ba721b5-191d-46a8-9693-bf994a0f8525",
+        "entity_type": [
+          "Transaction"
+        ],
+        "entity": {
+          "amount": 19400,
+          "description": "Q3 travel expense batch \u2014 11 staff reimbursement claims",
+          "currency": "ZAR",
+          "id": "5be1d08c-c832-4783-a8cd-ba445b38e349",
+          "category": "Travel & Expenses",
+          "type": "expense"
+        }
+      },
+      {
+        "document": null,
+        "entity_type": null,
+        "entity": null
+      },
+      {
+        "document": "db411b5c-38e1-4609-89c0-dda73258528b",
+        "entity_type": [
+          "Vendor"
+        ],
+        "entity": {
+          "name": "CloudHost Ltd"
+        }
+      },
+      {
+        "document": "db411b5c-38e1-4609-89c0-dda73258528b",
+        "entity_type": [
+          "Vendor"
+        ],
+        "entity": {
+          "name": "Adfinity Media"
+        }
+      }
+    ],
+    "response": "[LLM Response Placeholder - Actual response would come from Claude/Anthropic API]",
+    "timestamp": "2026-09-15T09:41:57.262238"
+  }
+]

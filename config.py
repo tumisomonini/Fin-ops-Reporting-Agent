@@ -24,6 +24,13 @@ BUDGET_OVERRUN_PCT = float(os.environ.get("BUDGET_OVERRUN_PCT", "15"))   # % ove
 LARGE_TRANSACTION_ZAR = float(os.environ.get("LARGE_TRANSACTION_ZAR", "50000"))  # flag as "large" for review
 OVERDUE_GRACE_DAYS = int(os.environ.get("OVERDUE_GRACE_DAYS", "0"))      # days past due before "overdue"
 
+# --- Memory Settings ---
+MEMORY_CONVERSATION_MAX_HISTORY = int(os.environ.get("MEMORY_CONVERSATION_MAX_HISTORY", "100"))  # Max conversation messages to keep
+MEMORY_REASONING_PERSIST_FILE = os.environ.get("MEMORY_REASONING_PERSIST_FILE", "reasoning_traces.json")  # File for reasoning traces
+MEMORY_CONVERSATION_PERSIST_FILE = os.environ.get("MEMORY_CONVERSATION_PERSIST_FILE", "conversation_history.json")  # File for conversation history
+MEMORY_ENABLE_NEO4J_STORAGE = os.environ.get("MEMORY_ENABLE_NEO4J_STORAGE", "true").lower() == "true"  # Store reasoning in Neo4j
+MEMORY_ENABLE_REASONING = os.environ.get("MEMORY_ENABLE_REASONING", "false").lower() == "true"  # Enable reasoning traces by default
+
 
 def require_config():
     """Raise a clear error early if required credentials are missing."""

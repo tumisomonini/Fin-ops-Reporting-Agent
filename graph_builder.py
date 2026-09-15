@@ -66,6 +66,7 @@ class GraphBuilder:
             )
 
         for inv in extraction.get("invoices", []):
+            inv_id = inv.get("invoice_id") or str(uuid.uuid4())
             tx.run(
                 """
                 MERGE (i:Invoice {invoice_id: $invoice_id})
@@ -78,7 +79,7 @@ class GraphBuilder:
                 MATCH (d:Document {source_id: $source_id})
                 MERGE (d)-[:MENTIONS]->(i)
                 """,
-                invoice_id=inv["invoice_id"],
+                invoice_id=inv_id,
                 amount=inv.get("amount"),
                 currency=inv.get("currency"),
                 issue_date=inv.get("issue_date"),
@@ -95,7 +96,7 @@ class GraphBuilder:
                     MERGE (i)-[:BILLED_BY]->(v)
                     """,
                     vendor_name=inv["vendor_name"],
-                    invoice_id=inv["invoice_id"],
+                    invoice_id=inv_id,
                 )
 
         for txn in extraction.get("transactions", []):

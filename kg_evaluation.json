@@ -1,0 +1,275 @@
+{
+  "timestamp": "2026-09-15T09:30:37.600972",
+  "node_counts": {
+    "Document": 46,
+    "Vendor": 7,
+    "Invoice": 5,
+    "Transaction": 27,
+    "Flag": 17
+  },
+  "relationship_counts": {
+    "MENTIONS": 34,
+    "BILLED_BY": 4,
+    "PAID_TO": 6,
+    "RAISED": 17,
+    "CONCERNS": 10
+  },
+  "overdue_invoices": [],
+  "vendor_spend": [
+    {
+      "vendor": "Adfinity Media",
+      "total_spend": 118000
+    },
+    {
+      "vendor": "CloudHost Ltd",
+      "total_spend": 42500
+    },
+    {
+      "vendor": "Zenith IT Services",
+      "total_spend": 28000
+    },
+    {
+      "vendor": "Kaelo Print Solutions",
+      "total_spend": 27100
+    },
+    {
+      "vendor": "Bramwell & Co Supplies",
+      "total_spend": 19780.0
+    },
+    {
+      "vendor": "Office Supplies Co",
+      "total_spend": 3240
+    },
+    {
+      "vendor": "Adobe",
+      "total_spend": 899
+    }
+  ],
+  "flags": [
+    {
+      "type": "budget_overrun",
+      "description": "Adfinity Media Q3 spend of R118,000 is approximately 22% over the budgeted R96,500. Marketing lead should be notified.",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Adfinity Media"
+    },
+    {
+      "type": "duplicate",
+      "description": "Office Supplies Co original invoice contained a duplicate line item. Corrected invoice reissued at R3,240 (was R4,100). Resolved, no further action needed.",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Office Supplies Co"
+    },
+    {
+      "type": "duplicate",
+      "description": "Possible duplicate of transaction 8451f20f-e493-46d1-9346-df3891606305 (same vendor, amount, and date).",
+      "entity_labels": [
+        "Transaction"
+      ],
+      "entity_ref": "45024d47-1669-4f74-8269-6a9fb868b9a3"
+    },
+    {
+      "type": "duplicate",
+      "description": "Two identical Adobe subscription charges of R899 appear on the same date (Aug 14).",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Adobe"
+    },
+    {
+      "type": "large_anomaly",
+      "description": "Consulting retainer of R485,000.00 via wire transfer is drastically larger than all other entries in this log, which range from R60 to R210. This warrants review and approval verification.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "missing_info",
+      "description": "Petty cash reconciliation for September is incomplete \u2014 only 60% of receipts submitted. Deadline is end of week.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "missing_info",
+      "description": "Vendor name is blank",
+      "entity_labels": [
+        "Invoice"
+      ],
+      "entity_ref": "INV-55102"
+    },
+    {
+      "type": "missing_info",
+      "description": "Due date is not specified",
+      "entity_labels": [
+        "Invoice"
+      ],
+      "entity_ref": "INV-55102"
+    },
+    {
+      "type": "missing_info",
+      "description": "Flight cost of $340 USD and conference registration of \u20ac150 EUR require currency conversion to ZAR before total claim can be finalised. Submitter has explicitly requested conversion guidance.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "missing_info",
+      "description": "Email references a potentially overdue invoice from vendor 'Meridian' but provides no invoice ID, amount, date, or other details to identify or confirm the specific invoice.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "missing_info",
+      "description": "Approver has indicated only one item can be processed today \u2014 prioritisation decision is pending. Both items have a Friday deadline and neither has been approved yet.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "missing_info",
+      "description": "Unclear whether the R12,900 paid in July was a partial payment or if there is a discrepancy against the supplier's stated invoice amount of R14,200. A R1,300 difference remains unresolved.",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Kaelo Print Solutions"
+    },
+    {
+      "type": "other",
+      "description": "Expense claim spans three currencies (ZAR, USD, EUR). A consistent base currency (ZAR) and applicable exchange rates must be confirmed by Finance before reimbursement can be processed.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "other",
+      "description": "Vendor contract renewal for Zenith IT Services requires sign-off by Friday or it lapses automatically, risking loss of current rate of R28,000/month.",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Zenith IT Services"
+    },
+    {
+      "type": "other",
+      "description": "Q3 travel expense batch (11 claims, R19,400) must be approved before Friday 5pm payroll cutoff or reimbursement rolls to next cycle, delaying staff payments by one month.",
+      "entity_labels": null,
+      "entity_ref": null
+    },
+    {
+      "type": "other",
+      "description": "Kaelo Print Solutions is threatening to pause the next print run if the payment discrepancy is not resolved this week. Urgent resolution required.",
+      "entity_labels": [
+        "Vendor"
+      ],
+      "entity_ref": "Kaelo Print Solutions"
+    },
+    {
+      "type": "overdue",
+      "description": "CloudHost Ltd invoice INV-88213 for R42,500 is 12 days overdue. Sign-off required to release payment or a hold reason must be documented.",
+      "entity_labels": [
+        "Invoice"
+      ],
+      "entity_ref": "INV-88213"
+    }
+  ],
+  "large_transactions": [
+    {
+      "id": "f57472c1-69cf-4505-bfea-acc448a9bb8b",
+      "description": "Consulting retainer",
+      "amount": 485000.0,
+      "currency": "ZAR",
+      "date": "2026-09-03",
+      "vendor": null
+    },
+    {
+      "id": "3b59da66-ba47-49e2-96eb-ac65aa57ef1f",
+      "description": "Adfinity Media Q3 marketing spend",
+      "amount": 118000,
+      "currency": "ZAR",
+      "date": null,
+      "vendor": "Adfinity Media"
+    }
+  ],
+  "recent_documents": [
+    {
+      "source_id": "10b80eb7-0e49-48db-ab32-9408955775ff",
+      "document_type": "invoice",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "1df0c542-539f-48e7-8e25-006870726e5e",
+      "document_type": "expense_log",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "2f0779fa-edd1-4364-bf28-579c8790535c",
+      "document_type": "expense_log",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "3d15ac18-7196-45f9-900c-69a0234e66dc",
+      "document_type": "invoice",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "4f9692f6-a44d-4c97-a7c7-5cf0104f6e5e",
+      "document_type": "expense_log",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "7ba721b5-191d-46a8-9693-bf994a0f8525",
+      "document_type": "email",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "809d89f0-e038-4c23-93ea-605d48ae3b47",
+      "document_type": "expense_log",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "9fde6477-6ee5-4eb9-b48e-371f2006c22a",
+      "document_type": "email",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "db411b5c-38e1-4609-89c0-dda73258528b",
+      "document_type": "email",
+      "date": "2026-09-15"
+    },
+    {
+      "source_id": "ed44286d-a1db-4d90-9352-89f598161bda",
+      "document_type": "email",
+      "date": "2026-09-15"
+    }
+  ],
+  "orphaned_nodes": {
+    "Document": 9,
+    "Vendor": 0,
+    "Invoice": 0,
+    "Transaction": 0,
+    "Flag": 0
+  },
+  "constraints": [
+    "<Record id=7 name='constraint_8f002f5b' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['__Entity__'] properties=['id'] ownedIndex='constraint_8f002f5b' propertyType=None>",
+    "<Record id=17 name='document_source_id' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['Document'] properties=['source_id'] ownedIndex='document_source_id' propertyType=None>",
+    "<Record id=19 name='flag_id' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['Flag'] properties=['id'] ownedIndex='flag_id' propertyType=None>",
+    "<Record id=4 name='invoice_id' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['Invoice'] properties=['invoice_id'] ownedIndex='invoice_id' propertyType=None>",
+    "<Record id=15 name='transaction_id' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['Transaction'] properties=['id'] ownedIndex='transaction_id' propertyType=None>",
+    "<Record id=2 name='vendor_name' type='UNIQUENESS' entityType='NODE' labelsOrTypes=['Vendor'] properties=['name'] ownedIndex='vendor_name' propertyType=None>"
+  ],
+  "indexes": [
+    "<Record id=10 name='community_keyword' state='ONLINE' populationPercent=100.0 type='FULLTEXT' entityType='NODE' labelsOrTypes=['__Community__'] properties=['summary'] indexProvider='fulltext-2.0' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 14, 8, 19, 57, 334000000, tzinfo=<UTC>) readCount=3>",
+    "<Record id=13 name='community_vector' state='ONLINE' populationPercent=100.0 type='VECTOR' entityType='NODE' labelsOrTypes=['__Community__'] properties=['embedding'] indexProvider='vector-2026.08' owningConstraint=None lastRead=None readCount=0>",
+    "<Record id=6 name='constraint_8f002f5b' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['__Entity__'] properties=['id'] indexProvider='range-1.0' owningConstraint='constraint_8f002f5b' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 26, 46, 28000000, tzinfo=<UTC>) readCount=780>",
+    "<Record id=16 name='document_source_id' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['Document'] properties=['source_id'] indexProvider='range-1.0' owningConstraint='document_source_id' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 16, 3, 586000000, tzinfo=<UTC>) readCount=82>",
+    "<Record id=8 name='entities' state='ONLINE' populationPercent=100.0 type='FULLTEXT' entityType='NODE' labelsOrTypes=['__Entity__', 'Session', 'User', 'Message', 'Concept', 'Organization', 'Person', 'Product', 'Group', 'Standard', 'Location', 'Role', 'Software'] properties=['id', 'description'] indexProvider='fulltext-2.0' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 14, 8, 19, 57, 349000000, tzinfo=<UTC>) readCount=6>",
+    "<Record id=12 name='entity_vector' state='ONLINE' populationPercent=100.0 type='VECTOR' entityType='NODE' labelsOrTypes=['__Entity__'] properties=['embedding'] indexProvider='vector-2026.08' owningConstraint=None lastRead=None readCount=0>",
+    "<Record id=18 name='flag_id' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['Flag'] properties=['id'] indexProvider='range-1.0' owningConstraint='flag_id' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 15, 18, 994000000, tzinfo=<UTC>) readCount=33>",
+    "<Record id=1 name='index_1b9dcc97' state='ONLINE' populationPercent=100.0 type='LOOKUP' entityType='RELATIONSHIP' labelsOrTypes=None properties=None indexProvider='token-lookup-1.0' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 30, 16, 470000000, tzinfo=<UTC>) readCount=21>",
+    "<Record id=0 name='index_460996c0' state='ONLINE' populationPercent=100.0 type='LOOKUP' entityType='NODE' labelsOrTypes=None properties=None indexProvider='token-lookup-1.0' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 30, 30, 694000000, tzinfo=<UTC>) readCount=73285>",
+    "<Record id=3 name='invoice_id' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['Invoice'] properties=['invoice_id'] indexProvider='range-1.0' owningConstraint='invoice_id' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 15, 18, 994000000, tzinfo=<UTC>) readCount=45>",
+    "<Record id=9 name='keyword' state='ONLINE' populationPercent=100.0 type='FULLTEXT' entityType='NODE' labelsOrTypes=['Chunk'] properties=['text'] indexProvider='fulltext-2.0' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 7, 29, 684000000, tzinfo=<UTC>) readCount=8>",
+    "<Record id=14 name='transaction_id' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['Transaction'] properties=['id'] indexProvider='range-1.0' owningConstraint='transaction_id' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 26, 33, 930000000, tzinfo=<UTC>) readCount=61>",
+    "<Record id=11 name='vector' state='ONLINE' populationPercent=100.0 type='VECTOR' entityType='NODE' labelsOrTypes=['Chunk'] properties=['embedding'] indexProvider='vector-2026.08' owningConstraint=None lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 7, 29, 679000000, tzinfo=<UTC>) readCount=5>",
+    "<Record id=5 name='vendor_name' state='ONLINE' populationPercent=100.0 type='RANGE' entityType='NODE' labelsOrTypes=['Vendor'] properties=['name'] indexProvider='range-1.0' owningConstraint='vendor_name' lastRead=neo4j.time.DateTime(2026, 9, 15, 7, 25, 17, 775000000, tzinfo=<UTC>) readCount=62>"
+  ],
+  "total_financial_nodes": 102,
+  "total_financial_relationships": 71
+}

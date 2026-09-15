@@ -57,6 +57,19 @@ python main.py report
 Shows overdue invoices, open flags (including any duplicates detected
 across documents), and a vendor spend rollup.
 
+**Prompt Engineering Interface** (for developing and testing prompts):
+```
+python prompt_engineer.py
+```
+This launches an interactive CLI for:
+- Engineering and saving prompt templates
+- Testing prompts against the Neo4j knowledge graph
+- Evaluating retrieval quality with metrics
+- Comparing outcomes from different prompts
+- Managing prompt templates and viewing metrics
+
+See [PROMPT_ENGINEERING_GUIDE.md](PROMPT_ENGINEERING_GUIDE.md) for details.
+
 ## Test documents
 
 `test_documents/` contains all 10 scenarios used to validate this against
