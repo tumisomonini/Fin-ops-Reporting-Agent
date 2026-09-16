@@ -1,6 +1,6 @@
-# Environment
+# Environment & secrets — never commit real credentials
 .env
-.env.example
+.streamlit/secrets.toml
 
 # Python
 __pycache__/

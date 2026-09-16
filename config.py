@@ -5,9 +5,28 @@ All values are read from environment variables (or a .env file, if present)
 so credentials never need to be hardcoded.
 """
 import os
+from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()
+_env_path = Path(__file__).parent / ".env"
+
+# Merge non-empty st.secrets first (lowest priority)
+try:
+    import streamlit as st
+    for _k, _v in st.secrets.items():
+        if str(_v).strip():
+            os.environ.setdefault(_k, str(_v))
+except Exception:
+    pass
+
+# .env always wins: strip empty vars then load (handles empty shell/secrets values)
+if _env_path.exists():
+    import re
+    for _line in _env_path.read_text().splitlines():
+        _m = re.match(r'^([A-Z0-9_]+)=', _line.strip())
+        if _m and os.environ.get(_m.group(1)) == "":
+            del os.environ[_m.group(1)]
+load_dotenv(dotenv_path=_env_path)
 
 # --- Neo4j ---
 NEO4J_URI = os.environ.get("NEO4J_URI", "bolt://localhost:7687")
