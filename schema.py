@@ -21,11 +21,16 @@ from neo4j import GraphDatabase
 import config
 
 CONSTRAINTS = [
+    # --- knowledge graph ---
     "CREATE CONSTRAINT vendor_name IF NOT EXISTS FOR (v:Vendor) REQUIRE v.name IS UNIQUE",
     "CREATE CONSTRAINT invoice_id IF NOT EXISTS FOR (i:Invoice) REQUIRE i.invoice_id IS UNIQUE",
     "CREATE CONSTRAINT transaction_id IF NOT EXISTS FOR (t:Transaction) REQUIRE t.id IS UNIQUE",
     "CREATE CONSTRAINT document_source_id IF NOT EXISTS FOR (d:Document) REQUIRE d.source_id IS UNIQUE",
     "CREATE CONSTRAINT flag_id IF NOT EXISTS FOR (f:Flag) REQUIRE f.id IS UNIQUE",
+    # --- context graph ---
+    "CREATE CONSTRAINT person_name IF NOT EXISTS FOR (p:Person) REQUIRE p.name IS UNIQUE",
+    "CREATE CONSTRAINT topic_name IF NOT EXISTS FOR (t:Topic) REQUIRE t.name IS UNIQUE",
+    "CREATE CONSTRAINT time_period_label IF NOT EXISTS FOR (tp:TimePeriod) REQUIRE tp.label IS UNIQUE",
 ]
 
 

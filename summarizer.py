@@ -18,6 +18,15 @@ import config
 from queries import GraphQueries
 from memory import get_memory_manager, ConversationMemory, ReasoningMemory
 
+_client: anthropic.Anthropic | None = None
+
+
+def _get_client() -> anthropic.Anthropic:
+    global _client
+    if _client is None:
+        _client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
+    return _client
+
 SUMMARIZER_SYSTEM_PROMPT = """You are a finance and operations assistant that helps me quickly \
 understand expense reports, finance/ops emails, and invoices. Always pull out the key facts \
 (amounts, dates, vendors/parties, categories, and any deadlines or action items) and present them \
@@ -105,7 +114,7 @@ def summarize(document_text: str, source_id: str,
              "flags_count": len(context.get("flags", []))}
         )
 
-    client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
+    client = _get_client()
     response = client.messages.create(
         model=config.CLAUDE_MODEL,
         max_tokens=1000,

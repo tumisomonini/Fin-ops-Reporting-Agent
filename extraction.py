@@ -18,6 +18,15 @@ import anthropic
 import config
 from memory import get_memory_manager, ReasoningMemory
 
+_client: anthropic.Anthropic | None = None
+
+
+def _get_client() -> anthropic.Anthropic:
+    global _client
+    if _client is None:
+        _client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
+    return _client
+
 EXTRACTION_SYSTEM_PROMPT = """You extract structured financial/operational entities from a document \
 (an invoice, expense report, transaction log, or finance/ops email) for loading into a knowledge graph.
 
@@ -78,8 +87,8 @@ def extract(document_text: str,
     Returns:
         dict: Extracted data with source_id and ingested_on fields
     """
-    client = anthropic.Anthropic(api_key=config.ANTHROPIC_API_KEY)
-    
+    client = _get_client()
+
     # Generate a source_id first so we can reference it in reasoning
     source_id = str(uuid.uuid4())
     

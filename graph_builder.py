@@ -6,6 +6,7 @@ Also runs lightweight duplicate detection at load time: if a transaction or
 invoice with the same vendor, amount, and date already exists, it raises a
 "duplicate" Flag instead of silently creating a second identical node.
 """
+import hashlib
 import uuid
 
 from neo4j import GraphDatabase
@@ -30,10 +31,21 @@ class GraphBuilder:
     def __exit__(self, *exc):
         self.close()
 
+    def already_ingested(self, raw_text: str) -> bool:
+        """Return True if a Document with this content hash already exists."""
+        h = hashlib.sha256(raw_text.encode()).hexdigest()
+        with self.driver.session() as session:
+            return session.run(
+                "MATCH (d:Document {content_hash: $h}) RETURN d LIMIT 1", h=h
+            ).single() is not None
+
     def load_extraction(self, extraction: dict, raw_text: str):
-        """Write one document's extracted entities/relationships into the graph."""
+        """Write one document's extracted entities/relationships into the graph,
+        then populate the context layer (Person, Topic, TimePeriod nodes)."""
+        from context_graph import ContextBuilder
         with self.driver.session() as session:
             session.execute_write(self._write_document, extraction, raw_text)
+        ContextBuilder(self.driver).load_context(extraction, raw_text)
 
     # --- internal write transaction ---
     @staticmethod
@@ -45,12 +57,14 @@ class GraphBuilder:
             MERGE (d:Document {source_id: $source_id})
             SET d.document_type = $document_type,
                 d.ingested_on = $ingested_on,
-                d.raw_text = $raw_text
+                d.raw_text = $raw_text,
+                d.content_hash = $content_hash
             """,
             source_id=source_id,
             document_type=extraction.get("document_type", "other"),
             ingested_on=extraction["ingested_on"],
             raw_text=raw_text,
+            content_hash=hashlib.sha256(raw_text.encode()).hexdigest(),
         )
 
         for vendor in extraction.get("vendors", []):

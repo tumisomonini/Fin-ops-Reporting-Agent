@@ -95,18 +95,45 @@ class GraphQueries:
             return [dict(record) for record in result]
 
     def document_context(self, source_id: str) -> dict:
-        """Everything the graph knows that was mentioned in one specific document."""
+        """Everything the graph knows that was mentioned in one specific document,
+        including context-layer nodes (people, topics, time period, thread)."""
         with self.driver.session() as session:
             result = session.run(
                 """
                 MATCH (d:Document {source_id: $source_id})
                 OPTIONAL MATCH (d)-[:MENTIONS]->(entity)
                 OPTIONAL MATCH (d)-[:RAISED]->(f:Flag)
+                OPTIONAL MATCH (d)-[:AUTHORED_BY]->(author:Person)
+                OPTIONAL MATCH (d)-[:REFERENCES]->(ref:Person)
+                OPTIONAL MATCH (d)-[:TAGGED]->(topic:Topic)
+                OPTIONAL MATCH (d)-[:COVERS]->(tp:TimePeriod)
                 RETURN d.document_type AS document_type,
                        collect(DISTINCT {labels: labels(entity), props: properties(entity)}) AS entities,
-                       collect(DISTINCT properties(f)) AS flags
+                       collect(DISTINCT properties(f)) AS flags,
+                       collect(DISTINCT author.name) AS authors,
+                       collect(DISTINCT ref.name) AS references,
+                       collect(DISTINCT topic.name) AS topics,
+                       tp.label AS time_period
                 """,
                 source_id=source_id,
             )
             record = result.single()
             return dict(record) if record else {}
+
+    def related_documents(self, source_id: str) -> list[dict]:
+        """Documents sharing a vendor with source_id, with shared vendor names."""
+        with self.driver.session() as session:
+            result = session.run(
+                """
+                MATCH (d:Document {source_id: $source_id})-[:MENTIONS]->(v:Vendor)
+                MATCH (other:Document)-[:MENTIONS]->(v)
+                WHERE other.source_id <> $source_id
+                RETURN other.source_id AS source_id,
+                       other.document_type AS document_type,
+                       other.ingested_on AS ingested_on,
+                       collect(DISTINCT v.name) AS shared_vendors
+                ORDER BY other.ingested_on DESC
+                """,
+                source_id=source_id,
+            )
+            return [dict(r) for r in result]

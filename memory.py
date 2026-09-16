@@ -365,6 +365,10 @@ class ReasoningMemory:
         
         return entry
     
+    def get_all_traces(self) -> list:
+        """Return all reasoning traces as a list."""
+        return list(self._traces.values())
+
     def get_trace(self, trace_id: str) -> Optional[ReasoningEntry]:
         """Get a specific reasoning trace by ID."""
         return self._traces.get(trace_id)
@@ -391,49 +395,55 @@ class ReasoningMemory:
     
     def _store_in_neo4j(self, entry: ReasoningEntry) -> None:
         """Store a reasoning trace in Neo4j."""
-        if self._neo4j_driver is None:
-            self._neo4j_driver = GraphDatabase.driver(
-                config.NEO4J_URI,
-                auth=(config.NEO4J_USER, config.NEO4J_PASSWORD)
+        try:
+            if self._neo4j_driver is None:
+                self._neo4j_driver = GraphDatabase.driver(
+                    config.NEO4J_URI,
+                    auth=(config.NEO4J_USER, config.NEO4J_PASSWORD)
+                )
+            with self._neo4j_driver.session() as session:
+                session.execute_write(self._write_reasoning_trace, entry)
+        except Exception:
+            import logging
+            logging.getLogger(__name__).warning(
+                "Failed to persist reasoning trace %s to Neo4j", entry.id, exc_info=True
             )
-        
-        with self._neo4j_driver.session() as session:
-            session.execute_write(self._write_reasoning_trace, entry)
     
     @staticmethod
     def _write_reasoning_trace(tx, entry: ReasoningEntry) -> None:
         """Write a reasoning trace to Neo4j."""
+        steps = [
+            {"description": s, "index": i}
+            for i, s in enumerate(entry.reasoning_steps)
+        ]
         tx.run(
             """
-            CREATE (r:ReasoningTrace {
-                id: $id,
-                timestamp: $timestamp,
-                task_type: $task_type,
-                input_text: $input_text,
-                final_output: $final_output,
-                confidence: $confidence,
-                document_id: $document_id,
-                session_id: $session_id
-            })
+            MERGE (r:ReasoningTrace {id: $id})
+            SET r.timestamp = $timestamp,
+                r.task_type = $task_type,
+                r.input_text = $input_text,
+                r.final_output = $final_output,
+                r.confidence = $confidence,
+                r.document_id = $document_id,
+                r.session_id = $session_id
             WITH r
-            FOREACH (step IN $reasoning_steps | 
+            FOREACH (step IN $steps |
                 CREATE (s:ReasoningStep {
-                    description: step,
-                    index: $index
+                    description: step.description,
+                    index: step.index
                 })
-                MERGE (r)-[:HAS_STEP]->(s)
+                CREATE (r)-[:HAS_STEP]->(s)
             )
             """,
             id=entry.id,
             timestamp=entry.timestamp,
             task_type=entry.task_type,
-            input_text=entry.input_text[:5000],  # Truncate long text
+            input_text=entry.input_text[:5000],
             final_output=str(entry.final_output)[:5000] if entry.final_output else None,
             confidence=entry.confidence,
             document_id=entry.document_id,
             session_id=entry.session_id,
-            reasoning_steps=entry.reasoning_steps,
-            index=0  # Simplified for now
+            steps=steps,
         )
     
     def _save_traces(self) -> None:
